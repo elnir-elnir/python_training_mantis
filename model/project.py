@@ -5,7 +5,8 @@
 
 
 class Project:
-    def __init__(self, id=None, name=None, status=None, inherit_global=None, view_state=None, description=None):
+    def __init__(self, id=None, name=None, status=None, inherit_global=None,
+                 view_state=None, description=None):
         self.id = id # Primary
         self.name = name # обязательное поле (UNI)
         self.status = status # Optional
