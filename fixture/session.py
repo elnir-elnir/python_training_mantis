@@ -22,7 +22,7 @@ class SessionHelper:
         wd.find_element(By.NAME, "username").send_keys(username)
         time.sleep(10)
         wd.find_element(By.CSS_SELECTOR, 'input[type="submit"]').click()
-        time.sleep(15)
+        time.sleep(10)
         wd.find_element(By.NAME, "password").clear()
         wd.find_element(By.NAME, "password").send_keys(password)
         # Мой вариант с xpath заменен на вариант из лекции, чтобы показать пример использования кавычек
