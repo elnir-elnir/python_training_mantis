@@ -92,43 +92,22 @@ class ProjectHelper:
 
     def select_project_by_id (self, project_id):
         wd = self.app.wd
-        #wd.find_element(By.CSS_SELECTOR, f'a[href*="project_id={project_id}"]').click()
-        # xpath = f"(//table[@class='table table-striped table-bordered table-condensed table-hover'])[1]//a[contains(@href, 'project_id={project_id}')]"
-        # link = wd.find_element(By.XPATH, xpath)
-        # wd.execute_script("arguments[0].click();", link)
-        xpath = f"//a[contains(@href,'manage_proj_edit_page.php?project_id={project_id}')]"
+        xpath = f"(//table[@class='table table-striped table-bordered table-condensed table-hover'])[1]//a[contains(@href, 'project_id={project_id}')]"
         wd.find_element(By.XPATH, xpath).click()
 
 
-    def select_project_by_name(self, project_name):
-        wd = self.app.wd
-
-        #wd.find_element(By.XPATH, f"//a[text()='{project_name}']").click()
-        # xpath=(//a[contains(text(),'Проект1')])[3] # что означает [3]? попробовать !!!!
-        wd.find_element(By.LINK_TEXT, f"{project_name}").click()
-
-
-    def go_to_edit_project_page_by_id(self, project_name):
-        #self.select_project_by_id(project_id)
-        self.select_project_by_name(project_name)
+    def go_to_edit_project_page_by_id(self, project_id):
+        self.select_project_by_id(project_id)
 
 
     def delete_project_via_projects_page(self, project):
         wd = self.app.wd
         self.open_control_page()
         self.open_projects_page()
-        self.go_to_edit_project_page_by_id(project)
-        wd.find_element(By.CSS_SELECTOR, 'button[formaction="manage_proj_delete.php"]').click()
-        wd.find_element(By.CSS_SELECTOR, 'input[type="submit"]').click()
 
+        project_id = self.get_project_id_by_project_name(project.name)
+        self.go_to_edit_project_page_by_id(project_id)
 
-    def delete_project_by_name(self, name):
-        wd = self.app.wd
-        self.open_control_page()
-        self.open_projects_page()
-        time.sleep(10)
-        wd.find_element(By.XPATH, f"//tr[.//a[contains(text(), '{name}')]]").click()
-        time.sleep(10)
         wd.find_element(By.CSS_SELECTOR, 'button[formaction="manage_proj_delete.php"]').click()
         wd.find_element(By.CSS_SELECTOR, 'input[type="submit"]').click()
 
